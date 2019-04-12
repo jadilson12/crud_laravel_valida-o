@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/cliente', function () {
+Route::get('/cliente', 'ClienteController@index');
 
 
