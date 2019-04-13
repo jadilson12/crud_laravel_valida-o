@@ -10,7 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/novocliente', 'ClienteController@create');
+Route::get('/', 'ClienteController@index');
 
-Route::get('/cliente', 'ClienteController@index');
+Route::post('/cliente', 'ClienteController@store');
+
 
 
