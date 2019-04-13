@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cliente;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -13,7 +14,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return view('cliente');
+        $cliente = Cliente::all();
+        return view('cliente', compact('cliente'));
     }
 
     /**
@@ -23,7 +25,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('novocliente');
     }
 
     /**
@@ -34,7 +36,32 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+            $mesagem = [
+                'nome.required' => 'Nome é obrigatório',
+                'nome.min' => 'Tem que ter no mímino 5 caracterias',
+                'nome.max' => 'Não é primitido valor acima de 10 caracterias',
+                'nome.unique' => 'Nome não está dosponivel',
+                'required' => 'O :attribute é obrigatório',
+                'email.required' => 'Email é obrigatório',
+                'email.email' => 'Favor digite um e-mail correto'
+        ];
+
+        $request->validate([
+            'nome'=> 'required|min:5|max:10|unique:clientes',
+            'idade'=> 'required',
+            'email'=> 'required|email',
+            'fone'=> 'required'
+          ], $mesagem);
+
+        dd($mesagem);
+        $cliente = new Cliente();
+        $cliente->nome = $request->input('nome');
+        $cliente->idade = $request->input('idade');
+        $cliente->email = $request->input('email');
+        $cliente->telefone = $request->input('fone');
+        $cliente->save();
+
     }
 
     /**
