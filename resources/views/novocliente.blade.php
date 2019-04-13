@@ -2,7 +2,7 @@
 <head>
     <title> Cadastro de cliente</title>
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
-    @csrf
+    <meta name="csrf-token" content="{{ csrf_token() }}">;
     <style type="text/css">
         body{
             padding: 20px;
@@ -24,30 +24,48 @@
                         @csrf
                         <div class="form-group">
                             <label for="nome">Nome do Cliente</label>
-                            <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome do Cliente">
+                            <input type="text" id="nome" name="nome" class="form-control {{ $errors->has('nome')  ? 'is-invalid': ''}}" placeholder="Nome do Cliente">
+                            @if($errors->has('nome'))
+                                <div class="invalid-feedback">
+                             {{ $errors->first('nome') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="idade">Idade do Cliente</label>
-                            <input type="text" id="idade" name="idade" class="form-control" placeholder="Idade do Cliente">
+                            <input type="text" id="idade" name="idade" class="form-control {{ $errors->has('idade')  ? 'is-invalid': ''}}" placeholder="Idade do Cliente">
+                            @if($errors->has('idade'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('idade') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="email">E-mail do Cliente</label>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="E-mail do Cliente">
+                            <input type="text" id="email" name="email" class="form-control {{ $errors->has('email')  ? 'is-invalid': ''}}" placeholder="E-mail do Cliente">
+                            @if($errors->has('email'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('email') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="fone">Telefone do Cliente</label>
-                            <input type="text" id="fone" name="fone" class="form-control" placeholder="fone do Cliente">
+                            <input type="text" id="fone" name="fone" class="form-control {{ $errors->has('fone')  ? 'is-invalid': ''}}" placeholder="fone do Cliente">
+                            @if($errors->has('fone'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('fone') }}
+                                </div>
+                            @endif
                         </div>
+                        <button type="submit" class="btn btn-primary btn-sm" role="button">Enviar</button>
                     </form>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-sm" role="button">Enviar</button>
-                    <button type="cancel" class="btn btn-danger btn-sm" role="button">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
-
 </main>
+
+<script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 </body>
 </html>
