@@ -2,7 +2,7 @@
     <head>
         <title> Cadastro de cliente</title>
         <link href="{{asset('css/app.css')}}" rel="stylesheet">
-        @csrf
+        <meta name="csrf-token" content="{{ csrf_token() }}">;
         <style type="text/css">
             body{
                 padding: 20px;
@@ -20,33 +20,34 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="/cliente" method="POST">
-                            <div class="form-group">
-                                <label for="nome">Nome do Cliente</label>
-                                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome do Cliente">
-                            </div>
-                            <div class="form-group">
-                                <label for="idade">Idade do Cliente</label>
-                                <input type="text" id="idade" name="idade" class="form-control" placeholder="Idade do Cliente">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">E-mail do Cliente</label>
-                                <input type="text" id="email" name="email" class="form-control" placeholder="E-mail do Cliente">
-                            </div>
-                            <div class="form-group">
-                                <label for="fone">Telefone do Cliente</label>
-                                <input type="text" id="fone" name="fone" class="form-control" placeholder="fone do Cliente">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary btn-sm">Enviar</button>
-                        <button type="cancel" class="btn btn-danger btn-sm">Cancelar</button>
+                       <table class="table table-bordered table-haver" id="tabelacliente">
+                           <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Idade</th>
+                                <th>email</th>
+                                <th>Telefone</th>
+                            </tr>
+                           </thead>
+                           <tbody>
+                                @foreach($cliente as $c)
+                                    <tr>
+                                       <td>{{ $c->id }}</td>
+                                       <td>{{ $c->nome}}</td>
+                                       <td>{{ $c->idade }}</td>
+                                       <td>{{ $c->email }}</td>
+                                       <td>{{ $c->telefone }}</td>
+                                    </tr>
+                                @endforeach
+                           </tbody>
+                       </table>
                     </div>
                 </div>
             </div>
         </div>
 
     </main>
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 </body>
 </html>
